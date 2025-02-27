@@ -14,142 +14,95 @@
 
     <!-- Theme CSS -->
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #d3d5d6;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        .navbar-vertical-nav {
-            width: 260px;
-            height: 100vh;
-            background-color: hsl(0, 0%, 100%);
-            border-right: 1px solid #cfcdcd;
-            position: fixed;
-            top: 0;
-            left: 0;
-            overflow-y: auto;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        .navbar-brand img {
-            max-width: 160px;
-            display: block;
-            margin: 20px auto;
-        }
-        .navbar-nav {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .nav-item {
-            display: block;
-            border-bottom: 1px solid #f1f1f1;
-        }
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 14px 24px;
-            text-decoration: none;
-            color: #333;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s;
-            border-radius: 6px;
-        }
-        
-        .nav-link:hover, .nav-link:focus {
-            background-color: #f8f9fa;
-            color: #007bff;
-        }
-        
-        .nav-link-icon {
-            margin-right: 12px;
-            font-size: 20px;
-        }
-        .container {
-            max-width: 1000px;
-            margin: auto;
-        }
-        .card {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-        }
-        .card-body {
-            padding: 20px;
-        }
+    /* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.08);
+}
+/* Table Header */
+thead {
+    background-color: #000;  /* Black background */
+    color: #fff;  /* White text */
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
 
-        .btn {
-            padding: 10px 16px;
-            font-size: 14px;
-            border-radius: 6px;
-            transition: background 0.3s;
-        }
-        .btn:hover {
-            opacity: 0.9;
-        }
-        .grid {
-            display: grid;
-            gap: 20px;
-        }
-        .grid-cols-12 {
-            grid-template-columns: repeat(12, 1fr);
-        }
-        .grid-cols-1 {
-            grid-template-columns: repeat(1, 1fr);
-        }
+thead th {
+    padding: 14px;
+    white-space: nowrap;
+}
 
-        .lg\:grid-cols-2 {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        .col-span-12 {
-            grid-column: span 12;
-        }
-        .lg\:col-span-4 {
-            grid-column: span 4;
-        }
-        .xl\:col-span-8 {
-            grid-column: span 8;
-        }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        thead {
-            background-color: #f4f5f7;
-            color: #333;
-        }
-        td, th {
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-        }
+tbody tr {
+    transition: background-color 0.2s ease-in-out;
+}
 
-        .status-shipped {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-        }
+tbody tr:hover {
+    background-color: #f8f9fa;
+}
 
-        @media (max-width: 1024px) {
-            .navbar-vertical-nav {
-                width: 100%;
-                position: relative;
-                box-shadow: none;
-            }
-            .main-content-wrapper {
-                margin-left: 0;
-            }
-        }
-    </style>
+td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+td img {
+    border-radius: 6px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Styling */
+.btn {
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary {
+    background-color: #815d3bfd;
+    border-color: #72553a;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+}
+
+/* Status Button */
+.list-toggle {
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}
+</style>
     <link rel="stylesheet" href="/public/styles/adminSideBar.css">
     <title>Casa Vogue - Admin</title>
 </head>
@@ -163,66 +116,71 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
-    <body>
-        <div class="main-wrapper">
+    
+<body>
+    <div class="main-wrapper">
+        <!-- Sidebar -->
         <%- include('./partials/sidebar') %>
+
+        <!-- Content -->
         <div class="container my-4">
             <h1 class="mb-3">Product List</h1>
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div class="d-flex">
-                    <input class="form-control me-2 w-75" type="text" name="search" style="max-height: 50px;"
-                        placeholder="Search Products..." id="product-search">
-                    <button class="btn btn-dark" type="submit" style="max-height: 50px;">🔍</button>
+                    <input class="form-control me-2 w-75" type="text" name="search" placeholder="Search Products..." id="product-search">
+                    <button class="btn btn-dark">🔍</button>
                 </div>
-                    <a href="/add-product">
+                <a href="/add-product">
                     <button class="btn btn-success">Add New Product</button>
                 </a>
             </div>
+
+            <!-- Product Table -->
             <table class="table table-bordered table-hover">
-                <thead class="bg-gray-200 text-gray-700">
+                <thead>
                     <tr>
-                        <th class="px-6 py-3">Product Name</th>
-                        <th class="px-6 py-3">Category</th>
-                        <th class="px-6 py-3">Material</th>
-                        <th class="px-6 py-3">Description</th>
-                        <th class="px-6 py-3">Image-1</th>
-                        <th class="px-6 py-3">Image-2</th>
-                        <th class="px-6 py-3">Image-3</th>
-                        <th class="px-6 py-3">Style</th>
-                        <th class="px-6 py-3">Price</th>
-                        <th class="px-6 py-3">Actions</th>
-                        <th class="px-6 py-3">Status</th>
+                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>Material</th>
+                        <th>Description</th>
+                        <th>Image-1</th>
+                        <th>Image-2</th>
+                        <th>Image-3</th>
+                        <th>Style</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% products.forEach(product => { %>
-                    <tr>
-                        <td><%= product.productName %></td>
-                        <td><%= product?.productCategoryId?.categoryName %></td>
-                        <td><%= product.material %></td>
-                        <td><%= product.description %></td>
-                        <td><img src="<%= product.productImage1 %>" width="50"></td>
-                        <td><img src="<%= product.productImage2 %>" width="50"></td>
-                        <td><img src="<%= product.productImage3 %>" width="50"></td>
-                        <td><%= product.style %></td>
-                        <td>$<%= product.productPrice %></td>
-                        <td>
-                            <a href="/product/edit/<%= product._id %>" class="btn btn-primary">Edit</a>
-                            <button class="btn btn-danger" onclick="deleteProduct('<%= product._id %>')">Delete</button>
-                        </td>
-                        <td>
-                            <% if (product.isListed) { %>
-                                <button class="btn btn-danger list-toggle" data-id="<%= product._id %>" data-action="unlist">Unlist</button>
-                            <% } else { %>
-                                <button class="btn btn-success list-toggle" data-id="<%= product._id %>" data-action="list">List</button>
-                            <% } %>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><%= product.productName %></td>
+                            <td><%= product?.category_id?.categoryName %></td>
+                            <td><%= product.productMaterial %></td>
+                            <td><%= product.description %></td>
+                            <td><img src="<%= product.images[0] %>" width="50"></td>
+                            <td><img src="<%= product.images[1] %>" width="50"></td>
+                            <td><img src="<%= product.images[2] %>" width="50"></td>
+                            <td><%= product.productStyle %></td>
+                            <td>$<%= product.price %></td>
+                            <td>
+                                <a href="/product/edit/<%= product._id %>" class="btn btn-primary">Edit</a>
+                                <button class="btn btn-danger" onclick="deleteProduct('<%= product._id %>')">Delete</button>
+                            </td>
+                            <td>
+                                <% if (product.isListed) { %>
+                                    <button class="btn btn-danger list-toggle" data-id="<%= product._id %>" data-action="unlist">Unlist</button>
+                                <% } else { %>
+                                    <button class="btn btn-success list-toggle" data-id="<%= product._id %>" data-action="list">List</button>
+                                <% } %>
+                            </td>
+                        </tr>
                     <% }); %>
                 </tbody>
             </table>
         </div>
-        </div>
+    </div>    
         <script>
             async function deleteProduct(id) {
                 Swal.fire({

@@ -15,8 +15,9 @@ router.put('/unblock/:id', adminController.unblockUser);
 router.get('/customer', adminController.getUsers);
 
 router.get('/products', ProductController.productPage)
-router.get('/add-product', ProductController.showAddProduct);
-router.post("/add-product", upload.array("images", 4), ProductController.addProduct);
+router.get('/add-product', ProductController.showAddProduct); 
+// router.post("/add-product", upload.any(), ProductController.addProduct);
+router.post("/add-product", upload.array("productImages", 4), ProductController.addProduct);
 
 
 router.get('/categories', CategoryController.getAllCategories); 
