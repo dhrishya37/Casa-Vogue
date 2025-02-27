@@ -1,0 +1,34 @@
+<nav class="navbar osahan-main-nav navbar-expand furniture-nav p-0 w-100">
+    <div class="container py-0 py-lg-0">
+        <div class="bg-white p-4">
+            <div class="position-relative d-flex align-items-center gap-2 site-brand">
+                <i class="ri-archive-drawer-line fs-2 lh-1"></i>
+                <div class="lh-1">
+                    <h5 class="fw-bold m-0">Casa Vogue</h5>
+                    <small class="text-dark">Furniture</small>
+                </div>
+                <a class="stretched-link" href="index.ejs"></a>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-lg-5 gap-4 m-none">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/index"><i class="ri-apps-2-line"></i> Home</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="/product">Products</a></li>
+            </ul>
+            <div class="d-flex align-items-center gap-4 ms-auto">
+                <a href="#" class="link-dark d-none d-lg-block" data-bs-toggle="modal" data-bs-target="#searchbar"><i class="ri-search-line ri-lg"></i></a>
+                <a href="/shop-cart.ejs" class="link-dark"><i class="ri-shopping-bag-2-line ri-lg"></i></a>
+                <% if (user) { %>
+                    <a href="/profile" class="link-dark"><i class="ri-user-line ri-lg"></i></a>
+                    <a href="/logout" class="btn btn-outline-dark">Logout</a>
+                <% } else { %>
+                    <a href="/login" class="btn btn-outline-dark">Login</a>
+                    <a href="/signup" class="btn btn-outline-dark">Sign Up</a>
+                <% } %>
+                <a href="#" class="link-dark d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar"><i class="ri-menu-3-line ri-lg"></i></a>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Vogue</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('img/latest-blog/blog-3.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .container {
+            max-width: 450px;
+            margin-top: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .btn-theme {
+            background-color: #940606;
+            color: white;
+        }
+        .btn-theme:hover {
+            background-color: #ee2f2f;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+        .global-error {
+            color: red;
+            font-size: 16px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+    <!-- Toastify CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-3">REGISTER</h2>
+
+        <!-- Error message for completely empty form -->
+        <div id="globalError" class="global-error"></div>
+
+        <form id="signupForm" action="/signup" method="POST" onsubmit="return validateForm()">
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" value="<%= typeof name!== 'undefined' ? name: '' %>">
+                <span id="nameError" class="error"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" value="<%= typeof email!== 'undefined' ? email: '' %>">
+                <span id="emailError" class="error"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" value="<%= typeof phone!== 'undefined' ? phone: '' %>">
+                <span id="phoneError" class="error"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" id="password" name="password"  class="form-control" placeholder="Enter your password" value="<%= typeof password!== 'undefined' ? password: '' %>">
+                <span id="passwordError" class="error"></span>
+            </div>
+
+            <button type="submit" class="btn btn-theme w-100">Create account</button>
+        </form>
+
+        <p class="mt-3 text-center">
+            Already have an account? <a href="/login">Login</a>
+        </p>
+    </div>
+<!-- Load Toastify before using it -->
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+<% if (error) { %>
+  <script>
+    window.onload = function() {
+      Toastify({
+        text: "<%= error %>",
+        duration: 3000,  
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "red",  
+      }).showToast();
+    };
+  </script>
+  <%}%>
+    <!--Frontend Validation Script -->
+    <script>
+        function validateForm() {
+            let isValid = true;
+            let isEmpty = true;
+            document.querySelectorAll(".error").forEach(el => el.innerText = ""); // Clear previous errors
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+
+            if (name || email || phone || password) {
+                isEmpty = false;
+            }
+
+            if (name === "") {
+                document.getElementById("nameError").innerText = "Name is required";
+                isValid = false;
+            }else if (!/^[A-Za-z\s]+$/.test(name)) {
+                document.getElementById("nameError").innerText = "Only alphabets and spaces are allowed.";
+                isValid = false;
+            }
+
+            if (email === "") {
+                document.getElementById("emailError").innerText = "Enter the email.";
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById("emailError").innerText = "Invalid email format.";
+                isValid = false;
+            }
+            if (phone === "") {
+                document.getElementById("phoneError").innerText = "Enter the phone number.";
+                isValid = false;
+            } else if (!/^[0-9]{10}$/.test(phone)) {
+                document.getElementById("phoneError").innerText = "Phone number must be 10 digits.";
+                isValid = false;
+            }
+            if (password === "") {
+                document.getElementById("passwordError").innerText = "Enter the password.";
+                isValid = false;
+            } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(password)) {
+                document.getElementById("passwordError").innerText = "Password must be at least 6 characters long and contain letters and numbers.";
+                isValid = false;
+            }
+
+            return isValid; // Allow submission if everything is valid
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

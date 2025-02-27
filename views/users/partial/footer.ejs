@@ -1,0 +1,47 @@
+
+<footer class="footer bg-black text-white">
+    <div class="footer-top border-bottom border-dark">
+        <div class="container">
+            <div class="row gx-md-4 gy-md-0 g-4">
+                <% const contactInfo = {
+                    address: "9016 Goldfield StreetSouth Richmond Hill, New York 11419",
+                    email1: "[email protected]",
+                    email2: "[email protected]",
+                    phone1: "+1800-964-152",
+                    phone2: "+1800-964-152"
+                }; %>
+                <div class="col-lg-3 col-12 border-end border-dark py-4">
+                    <div class="py-lg-5">
+                        <h6 class="fw-bold pb-3 text-uppercase">Contact us</h6>
+                        <div>
+                            <div class="d-flex align-items-start gap-4 mb-4">
+                                <i class="ri-map-pin-2-fill ri-2x text-secondary"></i>
+                                <div>
+                                    <p class="mb-0 text-secondary-emphasis"><%= contactInfo.address %></p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start gap-4 mb-4">
+                                <i class="ri-mail-fill ri-2x text-secondary"></i>
+                                <div>
+                                    <p class="mb-0 text-secondary-emphasis">
+                                        <a href="#"><%= contactInfo.email1 %></a><br>
+                                        <a href="#"><%= contactInfo.email2 %></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start gap-4 mb-0">
+                                <i class="ri-phone-fill ri-2x text-secondary"></i>
+                                <div>
+                                    <p class="mb-0 text-secondary-emphasis">
+                                        <%= contactInfo.phone1 %><br>
+                                        <%= contactInfo.phone2 %>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

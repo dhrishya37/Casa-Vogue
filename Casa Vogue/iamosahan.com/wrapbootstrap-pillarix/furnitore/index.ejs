@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/pages/icon.png" type="image/png">
+    <title><%= title %></title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/vender/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/vender/icofont/icofont.min.css">
+    <link rel="stylesheet" href="/vender/aos/dist/aos.css">
+    <link rel="stylesheet" href="/vender/remixicon/remixicon.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/common.css">
+</head>
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <%- include('navbar') %>
+
+    <% const features = [
+    { icon: "ri-thumb-up-line", title: "High Quality", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elitsed do eiusmod tempor." },
+    { icon: "ri-truck-line", title: "Fast Delivery", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elitsed do eiusmod tempor." },
+    { icon: "ri-shield-check-line", title: "Best Warranty", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elitsed do eiusmod tempor." }
+]; %>
+
+<div class="pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bg-white shadow p-5">
+                    <div class="row g-4 g-md-5">
+                        <% features.forEach(feature => { %>
+                        <div class="col-lg-4 col-12" data-aos="fade-up">
+                            <div class="text-center">
+                                <i class="<%= feature.icon %> ri-3x text-secondary"></i>
+                                <div class="pt-3">
+                                    <h5 class="fw-bold pb-2"><%= feature.title %></h5>
+                                    <p class="text-muted mb-0"><%= feature.description %></p>
+                                </div>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% const categories = [
+    { name: "Sofas", count: 24, image: "img/category/sofa.png" }
+]; %>
+
+<div class="py-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h1 class="fw-bold pb-1 display-4" data-aos="fade-up">Categories</h1>
+                <p class="text-muted mb-0" data-aos="fade-up">Check out latest updates</p>
+            </div>
+        </div>
+        <div class="row">
+            <% categories.forEach(category => { %>
+            <div class="col-lg-6 col-12" data-aos="fade-up">
+                <div class="bg-warning-subtle">
+                    <div class="row align-items-end">
+                        <div class="col-6 p-4">
+                            <small><%= category.count %></small>
+                            <h4 class="fw-bold mb-0"><%= category.name %></h4>
+                        </div>
+                        <div class="col-6">
+                            <img src="<%= category.image %>" alt="<%= category.name %>" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <%- include('footer') %>
+
+    <!-- Scripts -->
+    <script src="/vender/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vender/jquery/jquery-3.6.4.min.js"></script>
+    <script src="/vender/aos/dist/aos.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

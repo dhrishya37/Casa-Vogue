@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-button-color: #A8977B;
+    
+  }
+  
+.contain-width{
+    width: 95%;
+}
+
+body{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+

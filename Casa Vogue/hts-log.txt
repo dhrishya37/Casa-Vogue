@@ -1,0 +1,24 @@
+HTTrack3.49-2+htsswf+htsjava launched on Mon, 10 Feb 2025 17:16:52 at https://iamosahan.com/wrapbootstrap-pillarix/furnitore/index.html +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "fr, en, *" https://iamosahan.com/wrapbootstrap-pillarix/furnitore/index.html -O1 "C:\Mes Sites Web\Casa Vogue" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+17:20:10	Error: 	"Not Found" (404) at link https://iamosahan.com/wrapbootstrap-pillarix/furnitore/img/bg.png (from https://iamosahan.com/wrapbootstrap-pillarix/furnitore/css/common.css)
+17:20:11	Error: 	"Not Found" (404) at link https://iamosahan.com/wrapbootstrap-pillarix/furnitore/elements/elements.html (from https://iamosahan.com/wrapbootstrap-pillarix/furnitore/elements/elements-accordions-toggles.html)
+17:20:16	Error: 	"Not Found" (404) at link https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/contact-us.html (from https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/portfolio-full-width.html)
+17:20:16	Error: 	"Not Found" (404) at link https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/about.html (from https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/portfolio-full-width.html)
+17:20:16	Error: 	"Not Found" (404) at link https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/contact.html (from https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/portfolio-full-width.html)
+17:20:17	Error: 	"Not Found" (404) at link https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/admin.html (from https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/blog-grid-classic.html)
+17:20:17	Error: 	"Not Found" (404) at link https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/team-work.html (from https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/blog-grid-classic.html)
+17:20:17	Error: 	"Not Found" (404) at link https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/apps.html (from https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/blog-grid-classic.html)
+17:20:17	Error: 	"Not Found" (404) at link https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/technology.html (from https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/blog-grid-classic.html)
+17:20:17	Error: 	"Not Found" (404) at link https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/people.html (from https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/blog-list-sidebar.html)
+17:20:23	Error: 	"Not Found" (404) at link https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/privacy-policy.html (from https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/shop-checkout.html)
+17:20:23	Error: 	"Not Found" (404) at link https://iamosahan.com/wrapbootstrap-pillarix/furnitore/dist/ (from https://iamosahan.com/wrapbootstrap-pillarix/furnitore/vender/aos/dist/aos.js)
+17:20:23	Error: 	"Not Found" (404) at link https://iamosahan.com/wrapbootstrap-pillarix/furnitore/pages/Make sure you have included disqus JavaScript code in your document. Ex - https://lg-disqus.disqus.com/admin/install/platforms/universalcode/ (from https://iamosahan.com/wrapbootstrap-pillarix/furnitore/vender/light-gallery-master/dist/plugins/comment/lg-comment.min.js)
+
+HTTrack Website Copier/3.49-2 mirror complete in 3 minutes 31 seconds : 219 links scanned, 204 files written (22844650 bytes overall) [13820579 bytes received at 65500 bytes/sec], 11694254 bytes transferred using HTTP compression in 145 files, ratio 20%, 21.9 requests per connection
+(13 errors, 0 warnings, 0 messages)

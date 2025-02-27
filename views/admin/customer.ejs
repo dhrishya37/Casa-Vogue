@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Casa Vogue - Admin</title>
+    <style>
+      .table th, .table td{
+        min-width: 150px;
+        word-break: break-word;
+      }
+    </style>
+    <link rel="stylesheet" href="/styles/validationCommon.css">
+</head>
+<body style="overflow-x: hidden;">
+    <div class="main-wrapper">
+    <%-include('./partials/sidebar')%>
+        <div class="row">
+            <div class="content col-lg-10">
+                <div class="content-head w-100 row mt-3">
+                    <div class="customer-title col-lg-6">
+                        <h2 class="">Customers</h2>
+                    </div>
+                </div>
+            </div>
+            <form class="d-flex mb-2 mt-1" method="GET" action="/admin/customers">
+                <input class="form-control me-2 w-25" type="text" name="search" style="max-height: 50px;"
+                    placeholder="Search Users..." id="user-search" value="<%= searchQuery %>">
+                <button class="btn btn-dark" type="submit" style="max-height: 50px;">🔍</button>
+            </form>
+            <div class="content-body">
+                <table class = "text-secondary table table-bordered mt-3">
+                <thead class = "table-dark">
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone</th>  
+                    <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                <% allUsers.forEach(user =>{ %>
+                    <tr>
+                        <td><%= user.name %></td>
+                        <td><%= user.email %></td>
+                        <td><%= user.phone %></td>
+                        <% if (user.isBlocked == true) { %>
+                        <td><button class="btn btn-success" onclick="customerUnblockAction('<%= user._id %>')">UNBLOCK</button></td>
+                    <% }else{ %>
+                        <td><button class="btn btn-danger" onclick="customerBlockAction('<%= user._id %>')">BLOCK</button></td>
+                    <% } %>
+                    </tr>
+                <% }) %>
+                </tbody>
+            </table>
+            <ul class="pagination mb-5">
+                <% if(typeof page !== 'undefined' && page > 1){ %>
+                    <li class="page-item">
+                        <a class="page-link" href="?search=<%= searchQuery %>&page=<%= page - 1 %>">Previous</a>
+                    </li>
+                <% } %>
+                <% for(let i = 1; i <= totalPages; i++){ %>
+                    <li class="page-item <%= i === page ? 'active' : '' %>">
+                        <a class="page-link" href="?search=<%= searchQuery %>&page=<%= i %>"><%= i %></a>
+                    </li>
+                <% } %>
+                <% if(typeof page !== 'undefined' && page < totalPages){ %>
+                    <li class="page-item">
+                        <a class="page-link" href="?search=<%= searchQuery %>&page=<%= page + 1 %>">Next</a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    async function customerBlockAction(userId){
+        try{
+            const response = await fetch(`/block/${userId}`, {method: 'PUT'});
+            if(response.ok){
+                location.reload();
+            }else{
+                alert("Failed to block user.");
+            }
+        }catch (error){
+            console.error("Error blocking user:", error);
+        }
+    }
+
+    async function customerUnblockAction(userId){
+        try{
+            const response = await fetch(`/unblock/${userId}`, { method: 'PUT' });
+            if(response.ok){
+                location.reload();
+            }else{  
+                alert("Failed to unblock user.");
+            }
+        }catch (error){
+            console.error("Error unblocking user:", error);
+        }
+    }
+</script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/adminScript/adminCustomerValidator.js"></script>
+  <script src="/js/adminScript/customer.js"></script>
+</html>

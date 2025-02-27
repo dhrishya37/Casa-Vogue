@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Casa Vogue - Admin</title>
+    <style>
+      .table th, .table td {
+          min-width: 150px; 
+          word-break: break-word; 
+      }
+    </style>
+    <link rel="stylesheet" href="/styles/validationCommon.css">
+  </head>
+  
+  <body style="overflow-x: hidden;">
+    <div class="row">
+      <%-include('./partials/sidebar')%>
+      <div class="content col-lg-9">
+          <div class="content-head w-100 row mt-3">
+            <div class="category-title col-lg-6">
+              <h2 class="">Categories</h2>
+            </div>
+            <div class="add-category-btn col-lg-6 text-end">
+              <button class="btn btn-success" onclick="openCategoryPopup()">
+                Add New Category
+              </button>            
+            </div>
+        </div>
+        <form class="d-flex me-2 w-75 " method="GET" action="" >
+          <input class="form-control me-2 w-25" type="text" name="search" 
+              placeholder="Search Categories..." id="category-search">
+          <button class="btn btn-dark" type="submit" onclick="">🔍</button>
+        </form>
+        <div class="table-responsive">
+          <table class="table table-bordered mt-3">
+              <thead class="table-dark">
+                  <tr>
+                      <th>Sl.No</th>
+                      <th>Category Name</th>
+                      <th>Is Listed</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody id="categoryTableBody">
+                  <% if (categories.length > 0) { %>
+                      <% categories.forEach((category, index) => { %>
+                          <tr>
+                              <td><%= index + 1 %></td>
+                              <td><%= category.categoryName %></td>
+                              <td><%= category.isListed ? "Yes" : "No" %></td>
+                              <td>
+                                  <button class="btn btn-warning btn-sm" onclick="editCategory('<%= category._id %>', '<%= category.categoryName %>', '<%= category.isListed %>')">Edit</button>
+                                  <button class="btn btn-danger btn-sm" onclick="deleteCategory('<%= category._id %>')">Delete</button>
+                              </td>
+                          </tr>
+                      <% }); %>
+                  <% } else { %>
+                      <tr>
+                          <td colspan="4" class="text-center">No categories found</td>
+                      </tr>
+                  <% } %>
+              </tbody>
+          </table>
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- Modal -->
+  <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addCategoryModalLabel">Add new Category</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="categoryForm">
+            <div class="mb-3">
+              <label for="categoryName" class="form-label">Category Name</label>
+              <input type="text" class="form-control" id="categoryName" name="categoryName">
+            </div>
+            <div class="mb-3">
+              <label for="isListed" class="form-label">Is Listed</label>
+                <select id="isListed" name="isListed">
+                  <option value="true" selected>Yes</option>
+                  <option value="false">No</option>
+                </select>
+            </div>
+            </div>
+            <div class="mb-3">
+            <input type="file" name="categoryImage" accept="image/*" id="category-img">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" form="categoryForm" id="submitCategoryForm">Add Category</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </body>
+  <script>
+      function openCategoryPopup() {
+        Swal.fire({
+            title: "Add New Category",
+            html: `
+                <input type="text" id="swal-categoryName" class="swal2-input" placeholder="Category Name" required>
+                <select id="swal-isListed" class="swal2-input">
+                    <option value="true" selected>Listed</option>
+                    <option value="false">Not Listed</option>
+                </select>
+            `,
+            showCancelButton: true,
+            confirmButtonText: "Add",
+
+            preConfirm: async () => {
+                const categoryName = document.getElementById("swal-categoryName").value;
+                const isListed = document.getElementById("swal-isListed").value;
+                if (!categoryName) {
+                    Swal.showValidationMessage("Category Name is required");
+                    return false;
+                }
+                return {categoryName, isListed};
+            }
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await fetch("/admin/categories/add", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(result.value)
+                    });
+
+                    if (response.ok) {
+                        Swal.fire("Success", "Category added successfully", "success");
+                        setTimeout(() => location.reload(), 1000); 
+                    } else {
+                        Swal.fire("Error", "Something went wrong", "error");
+                    }
+                } catch (error) {
+                    Swal.fire("Error", "Failed to add category", "error");
+                }
+            }
+        });
+      }
+      function editCategory(categoryId, categoryName, isListed) {
+        Swal.fire({
+            title: "Edit Category",
+            html: `
+                <input type="text" id="swal-categoryName" class="swal2-input" value="${categoryName}" required>
+                <select id="swal-isListed" class="swal2-input">
+                    <option value="true" ${isListed === 'true' ? 'selected' : ''}>Yes</option>
+                    <option value="false" ${isListed === 'false' ? 'selected' : ''}>No</option>
+                </select>
+            `,
+            showCancelButton: true,
+            confirmButtonText: "Update",
+
+            preConfirm: async () => {
+                const updatedCategoryName = document.getElementById("swal-categoryName").value;
+                const updatedIsListed = document.getElementById("swal-isListed").value;
+                if (!updatedCategoryName) {
+                    Swal.showValidationMessage("Category Name is required");
+                    return false;
+                }
+                return { categoryId, updatedCategoryName, updatedIsListed };
+            }
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await fetch(`/admin/categories/edit/${categoryId}`, {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            categoryName: result.value.updatedCategoryName,
+                            isListed: result.value.updatedIsListed
+                        })
+                    });
+
+                    if (response.ok) {
+                        Swal.fire("Success", "Category updated successfully", "success");
+                        setTimeout(() => window.location.href="/categories", 1000);
+                    } else {
+                        Swal.fire("Error", "Failed to update category", "error");
+                    }
+                } catch (error) {
+                    Swal.fire("Error", "Something went wrong", "error");
+                }
+            }
+        });
+      }
+      function deleteCategory(categoryId) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to undo this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, delete it",
+            cancelButtonText: "Cancel"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const response = await fetch(`/admin/categories/delete/${categoryId}`, {
+                        method: "DELETE"
+                    });
+
+                    if (response.ok) {
+                        Swal.fire("Deleted!", "The category has been deleted.", "success");
+                        setTimeout(() => location.reload(), 1000);
+                    } else {
+                        Swal.fire("Error", "Failed to delete category", "error");
+                    }
+                } catch (error) {
+                    Swal.fire("Error", "Something went wrong", "error");
+                }
+            }
+        });
+      }
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/js/adminScript/categories.js"></script>
+</html>
