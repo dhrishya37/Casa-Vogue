@@ -154,7 +154,7 @@ td img {
                 </thead>
                 <tbody>
                     <% products.forEach(product => { %>
-                        <tr>
+                        <tr id="product-row-<%= product._id %>">
                             <td><%= product.productName %></td>
                             <td><%= product?.category_id?.categoryName %></td>
                             <td><%= product.productMaterial %></td>
@@ -181,26 +181,143 @@ td img {
             </table>
         </div>
     </div>    
+
+    <!-- modal -->
+    <div class="modal fade" id="updateProductModal" tabindex="-1" aria-labelledby="updateProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateProductModalLabel">Update Product</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateProductForm">
+                        <input type="hidden" id="productId" name="productId">
+                        
+                        <div class="mb-3">
+                            <label for="productName" class="form-label">Product Name</label>
+                            <input type="text" class="form-control" id="productName" name="productName">
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="category_id" class="form-label">Category</label>
+                            <select class="form-control" id="category_id" name="category_id">
+                                <% categories.forEach(category => { %>
+                                    <option value="<%= category._id %>"><%= category.categoryName %></option>
+                                <% }); %>
+                            </select>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="productMaterial" class="form-label">Material</label>
+                            <input type="text" class="form-control" id="productMaterial" name="productMaterial">
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="productStyle" class="form-label">Style</label>
+                            <input type="text" class="form-control" id="productStyle" name="productStyle">
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price ($)</label>
+                            <input type="number" class="form-control" id="price" name="price" step="0.01">
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="isListed" class="form-label">Is Listed</label>
+                            <select class="form-control" id="isListed" name="isListed">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+    
+                        <div class="mb-3">
+                            <label for="productImages" class="form-label">Product Images</label>
+                            <input type="file" class="form-control" name="productImages" id="productImages" accept="image/*" multiple>
+                        </div>
+    
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="submitUpdateProductForm">Update Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
         <script>
-            async function deleteProduct(id) {
+            async function deleteProduct(productId) {
                 Swal.fire({
                     title: "Are you sure?",
-                    text: "You won't be able to revert this!",
+                    text: "You won't be able to undo this!",
                     icon: "warning",
                     showCancelButton: true,
-                    confirmButtonColor: "#d33",
-                    cancelButtonColor: "#3085d6",
-                    confirmButtonText: "Yes, delete it!"
+                    confirmButtonText: "Yes, delete it",
+                    cancelButtonText: "Cancel"
                 }).then(async (result) => {
                     if (result.isConfirmed) {
-                        const response = await fetch(`/deleteproduct?productId=${id}`, { method: 'DELETE' });
-                        const result = await response.json();
-                        if (result.success) {
-                            Swal.fire("Deleted!", "Your product has been deleted.", "success").then(() => window.location.reload());
+                        try {
+                            const response = await fetch(`/admin/products/delete/${productId}`, {
+                                method: "DELETE"
+                            });
+            
+                            if (response.ok) {
+                                Swal.fire("Deleted!", "The product has been deleted.", "success");
+                                setTimeout(() => location.reload(), 1000);
+                            } else {
+                                Swal.fire("Error", "Failed to delete product", "error");
+                            }
+                        } catch (error) {
+                            Swal.fire("Error", "Something went wrong", "error");
                         }
                     }
                 });
-            }
+            }        
+        </script>
+        <script>
+            function openUpdateProductModal(product) {
+                document.getElementById("productId").value = product._id;
+                document.getElementById("productName").value = product.productName;
+                document.getElementById("category_id").value = product.category_id._id;
+                document.getElementById("productMaterial").value = product.productMaterial;
+                document.getElementById("description").value = product.description;
+                document.getElementById("productStyle").value = product.productStyle;
+                document.getElementById("price").value = product.price;
+                document.getElementById("isListed").value = product.isListed.toString();
+            
+                new bootstrap.Modal(document.getElementById("updateProductModal")).show();
+            }            
+        </script>
+        <script>
+            document.getElementById("submitUpdateProductForm").addEventListener("click", async function () {
+                const formData = new FormData(document.getElementById("updateProductForm"));
+                const productId = document.getElementById("productId").value;
+            
+                try {
+                    const response = await fetch(`/admin/products/update/${productId}`, {
+                        method: "PUT",
+                        body: formData
+                    });
+            
+                    const result = await response.json();
+            
+                    if (result.success) {
+                        Swal.fire("Updated!", "Product updated successfully.", "success").then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire("Error", "Failed to update product", "error");
+                    }
+                } catch (error) {
+                    Swal.fire("Error", "Something went wrong", "error");
+                }
+            });         
         </script>
     </body>
 </html>

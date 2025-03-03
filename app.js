@@ -26,5 +26,5 @@ app.set('view engine', 'ejs');
 app.use(userRoutes);
 app.use(adminRoutes);
 
-const port = 4000;
+const port = 3000;
 app.listen(port, () => console.log(`Server running on http://localhost:${port}`));

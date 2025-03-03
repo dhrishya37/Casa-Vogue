@@ -1,4 +1,4 @@
-<nav class="navbar osahan-main-nav navbar-expand furniture-nav p-0 w-100">
+<nav class="navbar osahan-main-nav navbar-expand furniture-nav p-0 w-100   ">
     <div class="container py-0 py-lg-0">
         <div class="bg-white p-4">
             <div class="position-relative d-flex align-items-center gap-2 site-brand">
@@ -15,7 +15,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/index"><i class="ri-apps-2-line"></i> Home</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="/product">Products</a></li>
+                <li class="nav-item"><a class="nav-link" href="/shop">Products</a></li>
             </ul>
             <div class="d-flex align-items-center gap-4 ms-auto">
                 <a href="#" class="link-dark d-none d-lg-block" data-bs-toggle="modal" data-bs-target="#searchbar"><i class="ri-search-line ri-lg"></i></a>
@@ -32,3 +32,14 @@
         </div>
     </div>
 </nav>
+<style>
+    .furniture-nav {
+        background: transparent !important; /* Makes the navbar background transparent */
+        box-shadow: none !important; /* Removes any shadow */
+    }
+
+    .navbar-nav .nav-link {
+        color: rgb(0, 0, 0) !important; /* Ensures the nav links are visible if needed */
+    }
+    
+</style>

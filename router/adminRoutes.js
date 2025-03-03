@@ -16,8 +16,10 @@ router.get('/customer', adminController.getUsers);
 
 router.get('/products', ProductController.productPage)
 router.get('/add-product', ProductController.showAddProduct); 
-// router.post("/add-product", upload.any(), ProductController.addProduct);
 router.post("/add-product", upload.array("productImages", 4), ProductController.addProduct);
+router.get("/product/edit/:id", ProductController.getEditProduct);
+router.delete("/admin/products/delete/:productId", ProductController.deleteProduct);
+router.put("/admin/products/update/:id", upload.array("productImages", 4), ProductController.updateProduct);
 
 
 router.get('/categories', CategoryController.getAllCategories); 

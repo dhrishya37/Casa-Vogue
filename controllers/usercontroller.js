@@ -14,7 +14,7 @@ exports.home = async(req, res)=> {
 }
 exports.renderSignup = async(req, res) => {
     const signError = req.session.signError || null;
-    req.session.signError = null; // Clear error after displaying
+    req.session.signError = null; 
     res.render('users/signup', { error: signError });
 };
 
@@ -54,17 +54,18 @@ exports.sendOtp = async (req,res)=>{
         await otpModel.updateOne({_id: req.session.otpId}, {otp: otp})
         await otpSender(otp,otpData.email);
         
+        console.log(otp)
         req.session.otpTime=60;
         req.session.otpStartTime = null
         res.redirect('/otp-page')
-    } catch (error) {
+    } catch (error){
         console.log(error);  
     }
 }
 
 exports.verifyOtpPage = async (req, res) => {
     const { otp } = req.body;
-    const error='';
+    let error='';
 
     if (!req.session.otpStartTime) {
         req.session.otpStartTime = Date.now();
@@ -86,6 +87,7 @@ exports.verifyOtpPage = async (req, res) => {
             error = "Invalid OTP. Please try again.";
             return res.render("users/otp", { error, time });
         }
+        req.session.isLogged = true;
         return res.redirect('/');
     } catch (error) {
         

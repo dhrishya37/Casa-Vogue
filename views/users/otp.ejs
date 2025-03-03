@@ -36,13 +36,7 @@
               <h3>Verify OTP</h3>
             </div>
             <div class="card-body">
-              <% if (error) { %>
-              <div class="alert alert-custom mt-3 text-center">
-                <%= error %>
-              </div>
-              <% } %>
-
-              <form action="/verify-otp" method="POST" id="verifyOtpForm">
+              <form action="/verify-otp" method="POST" id="verifyOtpForm" >
                 <div class="mb-3">
                   <label for="otp" class="form-label">Enter OTP</label>
                   <input
@@ -50,8 +44,8 @@
                     class="form-control"
                     name="otp"
                     id="otp"
-                    required
                   />
+                  <!-- <span id="otpError" class="error"></span> -->
                 </div>
                 <button
                   type="submit"
@@ -68,6 +62,7 @@
         </div>
       </div>
     </div>
+    
     <script>
       let time = Number(document.getElementById("timer").innerText); // 'time' is injected here from the server
 
@@ -75,38 +70,35 @@
       const submitButton = document.querySelector('button[type="submit"]');
       const resendButton = document.querySelector(".resend");
 
-      // Countdown logic
       const countdown = setInterval(() => {
         if (time > 0) {
           time--;
           timerElement.textContent = time; // Update the displayed time
           if (time < 30) {
             resendButton.classList.remove("disabled");
-            resendButton.style.pointerEvents = "auto"; // Re-enable click
+            resendButton.style.pointerEvents = "auto"; 
             resendButton.style.cursor = "pointer";
           }
         } else {
           if (time < 30) {
             resendButton.classList.remove("disabled");
-            resendButton.style.pointerEvents = "auto"; // Re-enable click
+            resendButton.style.pointerEvents = "auto"; 
             resendButton.style.cursor = "pointer";
           }
-          clearInterval(countdown); // Stop the countdown when time is up
-          submitButton.disabled = true; // Disable the "Confirm" button
-          submitButton.style.backgroundColor = "#ccc"; // Change button appearance
-          submitButton.style.cursor = "not-allowed"; // Show the "disabled" cursor
+          clearInterval(countdown); 
+          submitButton.disabled = true; 
+          submitButton.style.backgroundColor = "#ccc";
+          submitButton.style.cursor = "not-allowed";
         }
       }, 1000);
 
-      // Disable Resend OTP button for 15 seconds after page load
       resendButton.classList.add("disabled");
       resendButton.style.cursor = "not-allowed";
-      resendButton.style.pointerEvents = "disabled"; // Fully disables click
+      resendButton.style.pointerEvents = "disabled"; 
 
-      // Prevent click on the <a> tag when disabled
       resendButton.parentElement.addEventListener("click", function (e) {
         if (resendButton.classList.contains("disabled")) {
-          e.preventDefault(); // Block the link navigation
+          e.preventDefault(); 
         }
       });
     </script>

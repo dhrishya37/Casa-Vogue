@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/pages/icon.png" type="image/png">
+    <title>Casa Vogue - Furniture</title>
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="/vender/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/vender/icofont/icofont.min.css">
+    <link rel="stylesheet" href="/vender/aos/dist/aos.css">
+    <link rel="stylesheet" href="/vender/remixicon/remixicon.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <style>
+.shop-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    padding: 60px 20px;
+    color: rgb(14, 13, 13);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.shop-hero-content h1 {
+    font-size: 48px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.breadcrumb a {
+    color: #f8f9fa;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.breadcrumb span {
+    color: #ddd;
+}
+
+.shop-container {
+    display: flex;
+    gap: 20px;
+    padding: 40px 5%;
+}
+
+.shop-sidebar {
+    flex: 1;
+    max-width: 300px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-header h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.filter-option input {
+    cursor: pointer;
+}
+
+.price-range {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.range-inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.range-inputs input {
+    width: 48%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.range-slider {
+    width: 100%;
+}
+
+.apply-button {
+    width: 100%;
+    padding: 8px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.apply-button:hover {
+    background: #555;
+}
+
+.products-container {
+    flex: 3;
+}
+
+.products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sort-select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-image img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.product-info {
+    text-align: center;
+    padding: 10px;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.product-material,
+.product-style {
+    font-size: 14px;
+    color: #777;
+}
+
+.product-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+}
+
+.product-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.add-to-cart,
+.add-to-wishlist {
+    flex: 1;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add-to-cart {
+    background: #28a745;
+    color: white;
+}
+
+.add-to-cart:hover {
+    background: #218838;
+}
+
+.add-to-wishlist {
+    background: #fff;
+    border: 1px solid #ccc;
+}
+
+.add-to-wishlist:hover {
+    background: #f8f9fa;
+}
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.pagination-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.pagination-controls a {
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    color: #333;
+    font-weight: 500;
+}
+
+.pagination-controls a.active {
+    background: #333;
+    color: white;
+}
+
+.pagination-controls a:hover {
+    background: #555;
+    color: white;
+}
+
+    </style>
+</head>
+<body>
+    <div style="position: relative; background: rgb(224, 224, 226); max-height: 180vh;">
+        <div style="z-index: 1;">
+            <%- include('partial/navbar') %>
+
+            <section class="shop-hero" style="position: relative; background: url('/img/latest-blog/blog-4.jpg') center/cover no-repeat; max-height: 200vh; ">
+
+                <div class="shop-hero-content">
+                    <h1>SHOP</h1>
+                    <div class="breadcrumb">
+                        <a href="/">HOME</a> / <span>SHOP</span>
+                    </div>
+                </div>
+                <div class="hero-wave"></div>
+            </section>
+
+            <div class="shop-container">
+                <aside class="shop-sidebar">
+                    <div class="filter-section">
+                        <div class="filter-header">
+                            <h4>CATEGORIES</h4>
+                        </div>
+                        <div class="filter-options">
+                            <% if (categories.length > 0) { %>
+                                <% categories.forEach(category => { %>
+                                    <label class="filter-option">
+                                        <input type="checkbox">
+                                        <%= category.categoryName %>
+                                    </label>
+                                <% }) %>
+                            <% } else { %>
+                                <p>No categories found.</p>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="filter-header">
+                            <h4>PRICE</h4>
+                        </div>
+                        <div class="filter-options">
+                            <div class="price-range">
+                                <div class="range-inputs">
+                                    <input type="text" placeholder="Min" value="₹0">
+                                    <input type="text" placeholder="Max" value="₹5000">
+                                </div>
+                                <input type="range" min="0" max="10000" class="range-slider">
+                                <button class="apply-button">Apply</button>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <div class="products-container">
+                    <div class="products-header">
+                        <h3><%= totalProducts %> items found</h3>
+                        <div class="products-view-options">
+                            <select class="sort-select">
+                                <option>Best match</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="products-grid">
+                        <% if (products.length > 0) { %>
+                            <% products.forEach(product => { %>
+                                <div class="product-card">
+                                    <a href="/product/<%= product._id %>" class="product-image">
+                                        <img src="<%= product.images.length > 0 ? product.images[0] : '/img/placeholder.png' %>" 
+                                             alt="<%= product.productName %>">
+                                    </a>
+                                    <div class="product-info">
+                                        <h4 class="product-name"><%= product.productName %></h4>
+                                        <p class="product-material"><%= product.productMaterial %></p>
+                                        <p class="product-style"><%= product.productStyle %></p>
+                                        <div class="product-price">
+                                            <span class="current-price">₹<%= product.price %></span>
+                                        </div>
+                                        <div class="product-actions">
+                                            <button class="add-to-cart">Add to cart</button>
+                                            <button class="add-to-wishlist"><i class="far fa-heart"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        <% } else { %>
+                            <p>No products found.</p>
+                        <% } %>
+                    </div>
+
+                    <div class="pagination">
+                        <span class="pagination-info">
+                            Showing <%= (currentPage - 1) * 6 + 1 %> to <%= Math.min(currentPage * 6, totalProducts) %> of <%= totalProducts %> entries
+                        </span>
+                        <div class="pagination-controls">
+                            <% if (currentPage > 1) { %>
+                                <a href="/shop?page=<%= currentPage - 1 %>" class="pagination-prev">Previous</a>
+                            <% } %>
+                            <% for (let i = 1; i <= totalPages; i++) { %>
+                                <a href="/shop?page=<%= i %>" class="page-number <%= i === currentPage ? 'active' : '' %>">
+                                    <%= i %>
+                                </a>
+                            <% } %>
+                            <% if (currentPage < totalPages) { %>
+                                <a href="/shop?page=<%= currentPage + 1 %>" class="pagination-next">Next</a>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include('partial/footer') %>
+        </div>
+    </div>
+
+    <script src="/vender/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vender/jquery/jquery-3.6.4.min.js"></script>
+    <script src="/vender/aos/dist/aos.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+</html>

@@ -35,7 +35,6 @@ h5,
 h6 {
 	font-family: "DM Serif Display";
 	font-weight: 400 !important;
-
 	letter-spacing: 0.05rem;
 
 }
@@ -53,7 +52,6 @@ a:hover {
 	color: #a8977b;
 }
 
-/* Custom classes */
 .bg-warning-subtle {
 	background-color: #efebe2 !important;
 }
@@ -98,13 +96,13 @@ a:hover {
 	background-color: #a8977b !important;
 }
 
-/* Navbar */
 .furniture-nav .navbar-nav .nav-link {
 	text-transform: uppercase;
 	padding: 27px 0;
 	font-size: 14px;
 	margin: 0px 12px;
 	letter-spacing: 0.06rem;
+	background-color: transparent;
 }
 .furniture-nav .navbar-nav .nav-link:hover {
 	color: #a8977b;
@@ -112,14 +110,6 @@ a:hover {
 .furniture-nav .navbar-nav .nav-link.active {
 	color: #a8977b;
 }
-
-/* Homepage */
-/* .bg-homepage {
-	background-image: url(../img/hero.png);
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-} */
  
 .qualities {
 	margin-top: -5rem;
@@ -156,7 +146,6 @@ a:hover {
     background-color: #365899;
 }
 
-/* Mobile Media  */
 @media (max-width:992px) {
 	.m-none {
 		display: none;
