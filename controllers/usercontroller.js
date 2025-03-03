@@ -151,8 +151,12 @@ exports.blockedPage = async (req, res) => {
 };
 
 
-// exports.resetPassword = async (req, res)=> {
-
-// }
+exports.getResetPassword = async (req, res)=> {
+    try {
+        res.render('users/reset-password')
+    } catch (error) {
+        res.redirect('/login')
+    }
+}
 
 

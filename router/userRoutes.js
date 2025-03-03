@@ -15,6 +15,9 @@ router.get('/login', UserController.userLoginPage);
 router.post('/login', UserController.userLogin);
 router.get("/blocked", UserController.blockedPage);
 
+router.get("/reset-password", UserController.getResetPassword);
+
+
 router.get('/shop', ShopController.getShopPage);
 
 module.exports = router;

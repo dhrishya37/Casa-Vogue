@@ -64,7 +64,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Phone</label>
-                <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" value="<%= typeof phone!== 'undefined' ? phone: '' %>">
+                <input type="text" id="phone" name="phone" maxlength="10" class="form-control" placeholder="Enter your phone number" value="<%= typeof phone!== 'undefined' ? phone: '' %>">
                 <span id="phoneError" class="error"></span>
             </div>
 
